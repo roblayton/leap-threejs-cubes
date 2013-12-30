@@ -6,6 +6,14 @@ module.exports = function(grunt) {
         jshint: {
             src: ['<%= pkg.src_dir %>/assets/js/*.js']
         },
+        shell: {
+            options: {
+                stdout: true
+            },
+            rjs_optimize: {
+                command: ['cd src', 'node common/libs/r.js -o baseUrl=. name=assets/js/main mainConfigFile=assets/js/require.conf.js out=../build/assets/js/main.built.js'].join('&&')
+            }
+        },
         concat: {
             options: {
                 separator: ';'
@@ -44,12 +52,12 @@ module.exports = function(grunt) {
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-exec');
 
     // Default task(s).
-    grunt.registerTask('build', ['jshint', 'concat', 'copy']);
+    grunt.registerTask('build', ['jshint', 'shell', 'concat', 'copy']);
 };
