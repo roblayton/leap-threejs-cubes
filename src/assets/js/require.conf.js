@@ -14,6 +14,7 @@ require.config({
 		
 		// Libraries
         threejs: 'common/libs/three.js/three',
+        leapjs: 'common/libs/leap',
         jquery: 'common/libs/jquery-1.8.1',
         TweenMax: 'common/libs/TweenMax.min',
         TimelineMax: 'common/libs/TimelineMax.min',

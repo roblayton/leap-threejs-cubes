@@ -1,4 +1,4 @@
-require(['core/utils/FpsTracker', 'dom/primitives/Container', 'proj/ThreeController', 'threejs'], function(FpsTracker, Container, ThreeController) {
+require(['core/utils/FpsTracker', 'dom/primitives/Container', 'proj/ThreeController'], function(FpsTracker, Container, ThreeController) {
 	var Master = function() {
 
 		var container, controller, fps;
@@ -24,7 +24,7 @@ require(['core/utils/FpsTracker', 'dom/primitives/Container', 'proj/ThreeControl
 			});
 
             // Call render
-            controller.render();
+            //controller.render();
 		};
 
 		init();
