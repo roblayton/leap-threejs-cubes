@@ -1,4 +1,4 @@
-define(['proj/FallingCubeManager', 'threejs', 'TweenMax', 'leapjs'], function(FallingCubeManager) {
+define(['proj/FallingCubeManager', 'threejs', 'TweenMax', 'Leap'], function(FallingCubeManager) {
 	var ThreeController = function(container, options) {
 		options = options || {};
 		var self = this;
@@ -51,34 +51,35 @@ define(['proj/FallingCubeManager', 'threejs', 'TweenMax', 'leapjs'], function(Fa
 			width: 10,
 			height: 10,
 			depth: 10,
-			//color: 0x333333
+            color: 0x333333
 		});
 
 		var light = new THREE.AmbientLight(0x333333);
-		light.color.setHSL(0.1, 0.5, 0.3);
+        light.color.setHSL(0.1, 0.5, 0.3);
 		scene.add(light);
 
 		light = new THREE.DirectionalLight(0xffffff, 1);
-		light.position.set(1, 1, 1).normalize();
+        light.position.set(1, 1, 1).normalize();
 		scene.add(light);
 
-		light = new THREE.DirectionalLight(0xffffff, 1);
-		light.position.set( - 1, - 1, - 1).normalize();
+        light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set( - 1, - 1, - 1).normalize();
 
-		light = new THREE.DirectionalLight(0xffffff, 1);
-		light.position.set(0, 500, 0);
-		light.castShadow = true;
-		light.shadowMapWidth = 2048;
-		light.shadowMapHeight = 2048;
-		var d = 200;
-		light.shadowCameraLeft = - d;
-		light.shadowCameraRight = d;
-		light.shadowCameraTop = d * 2;
-		light.shadowCameraBottom = - d * 2;
+        light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(0, 500, 0);
+        light.castShadow = true;
+        light.shadowMapWidth = 2048;
+        light.shadowMapHeight = 2048;
+        var d = 200;
+        light.shadowCameraLeft = - d;
+        light.shadowCameraRight = d;
+        light.shadowCameraTop = d * 2;
+        light.shadowCameraBottom = - d * 2;
 
-		light.shadowCameraNear = 100;
-		light.shadowCameraFar = 600;
-		//		light.shadowCameraVisible = true;
+        light.shadowCameraNear = 100;
+        light.shadowCameraFar = 600;
+                //light.shadowCameraVisible = true;
+        //
 		Leap.loop(function(frame) {
 			if (frame.valid) {
 				//if (!startFrame) {
