@@ -9,7 +9,6 @@
 		} else {
 			return contents;
 		}
-	},
-    optimize: "none"
+	}
 })
 

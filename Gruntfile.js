@@ -11,7 +11,7 @@ module.exports = function(grunt) {
                 stdout: true
             },
             rjs_optimize: {
-                command: ['cd src', 'node common/libs/r.js -o baseUrl=. name=assets/js/main mainConfigFile=assets/js/require.conf.js out=../build/assets/js/main.built.js'].join('&&')
+                command: ['cd src', 'node common/libs/r.js -o build.js'].join('&&')
             }
         },
         concat: {
