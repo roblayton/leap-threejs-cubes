@@ -1,24 +1,13 @@
-define(['proj/FallingCubeManager', 'threejs', 'TweenMax', 'Leap'], function(FallingCubeManager) {
+define(['proj/FallingCubeManager', 'core/utils/Mapper', 'threejs', 'TweenMax', 'Leap'], function(FallingCubeManager, Mapper) {
 	var ThreeController = function(container, options) {
 		options = options || {};
 		var self = this;
 		var callback = options.callbacks.onRender;
 
-		// Map function to be used to map values from leap into proper degrees (0-360)
-		function map(value, inputMin, inputMax, outputMin, outputMax) {
-			outVal = ((value - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin);
-			if (outVal > outputMax) {
-				outVal = outputMax;
-			}
-			if (outVal < outputMin) {
-				outVal = outputMin;
-			}
-			return outVal;
-		}
-
 		// Scene
 		var scene = new THREE.Scene();
 		// ------
+
 		// Camera
 		var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 		camera.lookAt(scene.position);
@@ -26,19 +15,20 @@ define(['proj/FallingCubeManager', 'threejs', 'TweenMax', 'Leap'], function(Fall
 
 		var startFrame = null;
 		var camRadius = 290;
-		var rotateY = 90,
-		rotateX = 0,
-		curY = 0;
+		var rotateY = 90;
+		var rotateX = 0;
+		var curY = 0;
 		var fov = camera.fov;
 
 		var active = false;
-
 		// ------
+        
 		// Renderer
 		var renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		container.appendChild(renderer.domElement);
 		// ------
+
 		// Canvas
 		var canvas = container.getElementsByTagName('canvas')[0];
 		var width = canvas.width;
@@ -98,7 +88,7 @@ define(['proj/FallingCubeManager', 'threejs', 'TweenMax', 'Leap'], function(Fall
 					var t = startFrame.translation(frame);
 
 					// Limit y-axis betwee 0 and 180 degrees
-					curY = map(t[1], - 300, 300, 0, 179);
+					curY = Mapper.map(t[1], - 300, 300, 0, 179);
 
 					// Assign rotation coordinates
 					rotateX = t[0];
